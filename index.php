@@ -3,8 +3,13 @@
     // Import Koneksi Database
     include './databases/connect.php';
 
+    // Ambil message error dari data lapor untuk ditampilkan
     $error = $_SESSION['flash_error'] ?? '';
     unset($_SESSION['flash_error']);
+
+    // Ambil message success dari proses
+    $msg = $_SESSION['flash_msg'] ?? '';
+    unset($_SESSION['flash_msg']);
 
     // Variabel Pengecekan user Admin
     $isAdmin = (isset($_SESSION['admin_id']));
@@ -60,6 +65,9 @@
             <p class="text-center mb-4 font-bold">Lengkapi data berikut untuk melaporkan fasilitas yang rusak.</p>
             <?php if ($error !== '') { ?>
                 <p class="text-red-500 text-center mb-2"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
+            <?php } ?>
+            <?php if ($msg !== '') { ?>
+                <p class="text-green-600 text-center mb-2"><?= htmlspecialchars($msg, ENT_QUOTES, 'UTF-8') ?></p>
             <?php } ?>
 
              <div class="flex justify-center align-center">
@@ -118,6 +126,11 @@
         <?php } ?>
         <section id="daftar-laporan" aria-labelledby="judul-daftar" class="mt-12 flex flex-col justify-center">
             <h2 id="judul-daftar" class="font-bold text-center text-xl mb-3">Daftar Laporan Kerusakan</h2>
+            <?php if($isAdmin){?>
+                <?php if ($msg !== '') { ?>
+                    <p class="text-green-600 text-center mb-2"><?= htmlspecialchars($msg, ENT_QUOTES, 'UTF-8') ?></p>
+                <?php } ?>
+            <?php }?>
             <?php
                 echo '<p class="text-center mb-4">banyaknya laporan masuk: '. '<span class="font-bold">' . $jumlah . '</span>'. '</p>';
             ?>

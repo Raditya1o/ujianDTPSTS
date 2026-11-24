@@ -86,6 +86,8 @@ $error = '';
         $id
     ]);
     
+    // Kirim message berupa laporan berhasil diupdate
+    $_SESSION['flash_msg'] = "Laporan berhasil diupdate!";
     // Kembali ke halaman semulla
     header('Location: ../index.php');
     exit;
