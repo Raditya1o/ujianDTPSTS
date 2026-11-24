@@ -4,7 +4,7 @@ include '../databases/connect.php';
 
 // Pengecekan user apakah Admin ? 
 if(!isset($_SESSION['admin_id'])){
-    header('location: index.php');
+    header('location: ../login.php');
     exit();
 }
 // Cari ID

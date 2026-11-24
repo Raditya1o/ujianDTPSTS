@@ -6,7 +6,7 @@ $error = '';
 
     // Pengecekan user apakah Admin ? 
     if(!isset($_SESSION['admin_id'])){
-        header('location: ../index.php');
+        header('location: ../login.php');
         exit();
     }
 
@@ -100,22 +100,22 @@ $error = '';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pelaporan Kerusakan Fasilitas Sekolah</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- TANTANGAN UI/UX: Tambahkan styling CSS, Bootstrap, atau Tailwind sendiri. -->
 </head>
-<body>
-    <!-- Bagian ini merupakan starter HTML. Belum ada koneksi database ataupun query. -->
-    <header class="bg-gray-800 p-3 text-center text-white  border-b-3  border-gray-800">
-        <h1 class="text-2xl font-bold text-blue-500">Sistem Pelaporan Kerusakan Fasilitas Sekolah</h1>
-        <p>Catat dan pantau laporan kerusakan fasilitas sekolah.</p>
-        <nav aria-label="Navigasi utama" class="p-2">
-            <a href="#form-laporan" class="bg-gray-500 p-1 pl-2 pr-2 rounded-sm hover:bg-gray-700">Buat Laporan</a>
-            <a href="#daftar-laporan" class="bg-gray-500 p-1 pl-1 pr-2 rounded-sm hover:bg-gray-700">Daftar Laporan</a>
+<body class="bg-[#edf0f6]">
+   <header class="bg-gray-800 p-4 flex justify-evenly text-center text-white  border-b-3  border-gray-800">
+        <div>
+            <h1 class="text-2xl font-bold">Sistem Pelaporan Kerusakan Fasilitas Sekolah</h1>
+            <p>Catat dan pantau laporan kerusakan fasilitas sekolah.</p>
+        </div>
+        <nav aria-label="Navigasi utama" class="p-2 flex items-center gap-2">
+            <a href="#form-laporan" class="bg-white text-black p-1 pl-2 pr-2 rounded-sm hover:bg-blue-500 hover:text-white">Buat Laporan</a>
+            <a href="#daftar-laporan" class="bg-white text-black p-1 pl-2 pr-2 rounded-sm hover:bg-blue-500 hover:text-white">Daftar Laporan</a>
         </nav>
     </header>
 
     <main class="m-3 p-2 gap-3">  
         <section id="form-laporan" aria-labelledby="judul-form" >
-            <h2 id="judul-form" class="text-center">Edit Data Pelaporan Kerusakan</h2>
+            <h2 id="judul-form" class="text-center font-bold">Edit Data Pelaporan Kerusakan</h2>
             <p class="text-center mb-4">Edit data laporan berikut</p>
              <?php if ($error !== '') { ?>
                 <p class="text-red-500 text-center mb-2"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
@@ -127,7 +127,7 @@ $error = '';
              <?php 
                 
              ?>
-                 <form action="" method="post" class="border p-4 flex justify-center align-center rounded-sm shadow-md border-gray-300 w-75">
+                 <form action="" method="post" class="border p-4 flex justify-center align-center rounded-sm shadow-md border-gray-200 w-75 bg-white">
                        <input
                             type="hidden"
                             name="id"

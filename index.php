@@ -33,17 +33,19 @@
     <title>Pelaporan Kerusakan Fasilitas Sekolah</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-    <header class="bg-gray-800 p-3 text-center text-white  border-b-3  border-gray-800">
-        <h1 class="text-2xl font-bold text-blue-500">Sistem Pelaporan Kerusakan Fasilitas Sekolah</h1>
-        <p>Catat dan pantau laporan kerusakan fasilitas sekolah.</p>
-        <nav aria-label="Navigasi utama" class="p-2">
-            <a href="#form-laporan" class="bg-gray-500 p-1 pl-2 pr-2 rounded-sm hover:bg-gray-700">Buat Laporan</a>
-            <a href="#daftar-laporan" class="bg-gray-500 p-1 pl-1 pr-2 rounded-sm hover:bg-gray-700">Daftar Laporan</a>
+<body class="bg-[#edf0f6]">
+    <header class="bg-gray-800 p-4 flex justify-evenly text-center text-white  border-b-3  border-gray-800">
+        <div>
+            <h1 class="text-2xl font-bold ">Sistem Pelaporan Kerusakan Fasilitas Sekolah</h1>
+            <p>Catat dan pantau laporan kerusakan fasilitas sekolah.</p>
+        </div>
+        <nav aria-label="Navigasi utama" class="p-2 flex items-center gap-2">
+            <a href="#form-laporan" class="bg-white text-black p-1 pl-2 pr-2 rounded-sm hover:bg-blue-500 hover:text-white">Buat Laporan</a>
+            <a href="#daftar-laporan" class="bg-white text-black p-1 pl-1 pr-2 rounded-sm hover:bg-blue-500 hover:text-white">Daftar Laporan</a>
             <?php if($isAdmin) { ?>
                 <a href="logout.php" class="bg-red-500 p-1 pl-2 pr-2 rounded-sm hover:bg-red-700">Logout Admin</a>
             <?php } else {?>
-                <a href="login.php" class="bg-gray-500 p-1 pl-2 pr-2 rounded-sm hover:bg-gray-700">Login Admin</a>
+                <a href="login.php" class="bg-white text-black p-1 pl-2 pr-2 rounded-sm hover:bg-blue-500 hover:text-white">Login Admin</a>
             <?php } ?>
         </nav>
     </header>
@@ -53,18 +55,18 @@
         <!-- Formulir Laporan Barang Hilang (Jika admin mengunjungi halaman ini, maka formulir akan di hide) -->
 
         <?php if(!$isAdmin) {?>
-        <section id="form-laporan" aria-labelledby="judul-form" >
-            <h2 id="judul-form" class="text-center">Form Pelaporan Kerusakan</h2>
-            <p class="text-center mb-4">Lengkapi data berikut untuk melaporkan fasilitas yang rusak.</p>
+        <section id="form-laporan" aria-labelledby="judul-form" class >
+            <h2 id="judul-form" class="text-center font-bold">Form Pelaporan Kerusakan</h2>
+            <p class="text-center mb-4 font-bold">Lengkapi data berikut untuk melaporkan fasilitas yang rusak.</p>
             <?php if ($error !== '') { ?>
                 <p class="text-red-500 text-center mb-2"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
             <?php } ?>
 
              <div class="flex justify-center align-center">
 
-                 <form action="./backend/data_lapor.php" method="post" class="border p-4 flex justify-center align-center rounded-sm shadow-md border-gray-300 w-75">
+                 <form action="./backend/data_lapor.php" method="post" class="border p-4 flex justify-center align-center rounded-sm shadow-md border-gray-200 w-75 bg-white">
                      <fieldset class="w-50">
-                    <legend class="text-center">Data Pelaporan</legend>
+                    <legend class="text-center font-bold text-xl mb-3 mt-3">Data Pelaporan</legend>
 
                 
                         <label for="nama_pelapor">Nama pelapor</label>
@@ -105,7 +107,7 @@
                         </select>
                     
 
-                    <button name="submit" type="submit" class="border rounded-sm border-gray-300 p-2 w-full bg-gray-800 text-white cursor-pointer hover:shadow-lg">Kirim Laporan</button>
+                    <button name="submit" type="submit" class="border rounded-sm  hover:bg-blue-700 p-2 w-full bg-blue-500 text-white cursor-pointer hover:shadow-lg">Kirim Laporan</button>
                 </fieldset>
             </form>
 
@@ -114,24 +116,24 @@
         </div>
         </section>
         <?php } ?>
-        <section id="daftar-laporan" aria-labelledby="judul-daftar" class="mt-12">
+        <section id="daftar-laporan" aria-labelledby="judul-daftar" class="mt-12 flex flex-col justify-center">
             <h2 id="judul-daftar" class="font-bold text-center text-xl mb-3">Daftar Laporan Kerusakan</h2>
             <?php
-                echo '<p class="text-center">banyaknya laporan masuk: '. '<span class="font-bold">' . $jumlah . '</span>'. '</p>';
+                echo '<p class="text-center mb-4">banyaknya laporan masuk: '. '<span class="font-bold">' . $jumlah . '</span>'. '</p>';
             ?>
-            <table class="border-collapse border border-gray-400 w-full mr-3 ">
+            <table class="border-separate border-spacing-0 overflow-hidden border-gray-400 w-4/5 max-w-6xl mx-auto rounded-2xl">
                 <thead class="bg-gray-800 text-white border-b-2 border-gray-400 ">
                     <tr>
-                        <th scope="col" class="border p-2 text-left border-gray-300 font-semibold">No.</th>
-                        <th scope="col" class="border p-2 text-left border-gray-300 font-semibold">Fasilitas</th>
-                        <th scope="col" class="border p-2 text-left border-gray-300 font-semibold ">Lokasi</th>
-                        <th scope="col" class="border p-2 text-left border-gray-300 font-semibold">Pelapor</th>
-                        <th scope="col" class="border p-2 text-left border-gray-300 font-semibold">kategori</th>
-                        <th scope="col" class="border p-2 text-left border-gray-300 font-semibold">deskripsi</th>
-                        <th scope="col" class="border p-2 text-left border-gray-300 font-semibold">Prioritas</th>
-                        <th scope="col" class="border p-2 text-left border-gray-300 font-semibold">Status</th>
-                        <th scope="col" class="border p-2 text-left border-gray-300 font-semibold">Tanggal</th>
-                        <th scope="col" class="border p-2 text-left border-gray-300 font-semibold">Penanggung Jawab</th>
+                        <th scope="col" class=" p-2 text-left  font-semibold">No.</th>
+                        <th scope="col" class=" p-2 text-left  font-semibold">Fasilitas</th>
+                        <th scope="col" class=" p-2 text-left  font-semibold ">Lokasi</th>
+                        <th scope="col" class=" p-2 text-left  font-semibold">Pelapor</th>
+                        <th scope="col" class=" p-2 text-left  font-semibold">kategori</th>
+                        <th scope="col" class=" p-2 text-left  font-semibold">deskripsi</th>
+                        <th scope="col" class=" p-2 text-left  font-semibold">Prioritas</th>
+                        <th scope="col" class=" p-2 text-left  font-semibold">Status</th>
+                        <th scope="col" class=" p-2 text-left  font-semibold">Tanggal</th>
+                        <th scope="col" class=" p-2 text-left  font-semibold">Penanggung Jawab</th>
                         <!-- Kolom ini akan muncul bila admin mengakses halaman ini -->
                         <?php  if($isAdmin) {?>
                             <th scope="col" class="border p-2 text-left border-gray-300 font-semibold">Aksi</th>
@@ -144,7 +146,7 @@
                                 if($sql_show){
                                     while ($row = $sql_show->fetch(PDO::FETCH_ASSOC)) {
                         ?>
-                                        <tr>
+                                        <tr class=" bg-white">
                                         <td scope="col" class="border p-2 text-left border-gray-300"><?= $row['id_laporan'] ?></td>
                                         <td scope="col" class="border p-2 text-left border-gray-300"><?= $row['nama_fasilitas']?></td>
                                         <td scope="col" class="border p-2 text-left border-gray-300"><?= $row['lokasi']?></td>

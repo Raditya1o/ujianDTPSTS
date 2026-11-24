@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: index.php');
             exit;
          } else {
-            $error = 'Email dan Password salah!';
+            $error = 'Email atau Password salah!';
          }
     }
 }
@@ -44,61 +44,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
-        }
-
-        main {
-            max-width: 350px;
-            margin: 60px auto;
-            padding: 20px;
-            background: white;
-            border: 1px solid #ccc;
-        }
-
-        label,
-        input {
-            display: block;
-            width: 100%;
-            box-sizing: border-box;
-            margin-bottom: 10px;
-        }
-
-        input,
-        button {
-            padding: 8px;
-        }
-
-        button {
-            width: 100%;
-        }
-
-        .error {
-            color: red;
-        }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-    <main>
-        <h1>Login Admin</h1>
+<body class="bg-[#f2f2f2] font-sans">
+    <main class="mx-auto mt-16 max-w-sm border border-gray-300 bg-white p-5">
+        <h1 class="my-4 text-3xl font-bold">Login Admin</h1>
 
         <?php if ($error !== '') { ?>
-            <p class="error"><?= htmlspecialchars($error) ?></p>
+            <p class="my-4 text-red-600"><?= htmlspecialchars($error) ?></p>
         <?php } ?>
 
         <form method="post" action="">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <label for="email" class="mb-2 block">Email</label>
+            <input type="email" id="email" name="email" required class="mb-2 block w-full border border-gray-300 p-2">
 
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
+            <label for="password" class="mb-2 block">Password</label>
+            <input type="password" id="password" name="password" required class="mb-2 block w-full border border-gray-300 p-2">
 
-            <button type="submit">Masuk</button>
+            <button type="submit" class="w-full border border-gray-300 bg-gray-200 p-2">Masuk</button>
         </form>
 
-        <p><a href="index.php">Kembali ke halaman utama</a></p>
+        <p class="my-4"><a href="index.php" class="text-blue-600 underline">Kembali ke halaman utama</a></p>
     </main>
 </body>
 </html>
