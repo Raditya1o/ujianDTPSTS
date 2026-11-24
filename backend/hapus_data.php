@@ -1,4 +1,5 @@
 <?php 
+session_start();
 include '../databases/connect.php';
 
 // Pengecekan user apakah Admin ? 

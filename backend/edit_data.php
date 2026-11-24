@@ -1,9 +1,12 @@
 <?php
-    session_start();
+session_start();
+
+//Siapkan data untuk menyimpan error
+$error = '';
 
     // Pengecekan user apakah Admin ? 
     if(!isset($_SESSION['admin_id'])){
-        header('location: index.php');
+        header('location: ../index.php');
         exit();
     }
 
@@ -38,7 +41,28 @@
         $deskripsi = trim($_POST['deskripsi'] ?? '');
         $prioritas = $_POST['prioritas'] ?? '';
 
+         // Proses Validasi data
+        if(empty($nama_pelapor)) {
+            $error = 'Nama belum diisi';
+            }elseif(strlen($nama_pelapor) < 3) {
+                $error = 'Nama terlalu pendek! (Minimal 3 huruf)';
+            }elseif(empty($nama_fasilitas)) {
+                $error = 'Nama Fasilitas wajib diisi!';
+            }elseif(strlen($nama_fasilitas) < 5) {
+                $error = 'Nama Fasilitas Terlalu Pendek! (minimal 5 huruf)';
+            }elseif(empty($lokasi)) {
+                $error = 'Lokasi wajib diisi!';
+            }elseif(strlen($lokasi) < 5){
+                $error = 'Lokasi terlalu Pendek! (minimal 5 huruf)';
+            }elseif(empty($deskripsi)){
+                $error = "Deskripsi Wajib diisi!";
+            }elseif(strlen($deskripsi) < 10 ){
+                $error = "Deskripsi Terlalu Pendek! (minimal 10 huruf)";
+            }elseif(empty($prioritas)) {
+                $error = 'Prioritas wajb diisi!';
+        }
 
+        if($error === '') {
         // Prepare statement untuk mempersiapakan perintah SQL
         $sql = $conn->prepare(
             'UPDATE laporan_kerusakan
@@ -66,6 +90,7 @@
     header('Location: ../index.php');
     exit;
     }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -92,6 +117,9 @@
         <section id="form-laporan" aria-labelledby="judul-form" >
             <h2 id="judul-form" class="text-center">Edit Data Pelaporan Kerusakan</h2>
             <p class="text-center mb-4">Edit data laporan berikut</p>
+             <?php if ($error !== '') { ?>
+                <p class="text-red-500 text-center mb-2"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
+            <?php } ?>
 
             <!-- TANTANGAN BONUS CREATE: Buat proses PHP agar POST menyimpan data. -->
              <div class="flex justify-center align-center">
@@ -138,13 +166,13 @@
                         <textarea id="deskripsi" name="deskripsi" rows="4" required class="border rounded-sm border-gray-300 p-2 "><?= htmlspecialchars($data_lama['deskripsi']) ?> </textarea>
                     
                     
-<!--                 
+                
                         <label for="prioritas">Prioritas</label>
                         <select id="prioritas" name="prioritas" required class="border border-gray-300 p-2 rounded-sm w-full mb-4">
                             <?php foreach(['Rendah', 'Sedang', 'Tinggi'] as $p) {?>
                              <option value="<?= htmlspecialchars($p) ?>" <?= $data_lama['prioritas'] === $p ? 'selected' : '' ?>> <?= htmlspecialchars($p) ?></option>
                              <?php } ?>
-                        </select> -->
+                        </select>
                     
 
                     <button name="update" type="submit" value="1" class="border rounded-sm border-gray-300 p-2 w-full bg-gray-800 text-white cursor-pointer hover:shadow-lg">Kirim Laporan</button>

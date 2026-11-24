@@ -1,11 +1,13 @@
 <?php
     session_start();
+    // Import Koneksi Database
+    include './databases/connect.php';
+
+    $error = $_SESSION['flash_error'] ?? '';
+    unset($_SESSION['flash_error']);
 
     // Variabel Pengecekan user Admin
     $isAdmin = (isset($_SESSION['admin_id']));
-
-    // Import Koneksi Database
-    include './databases/connect.php';
 
     // Ambil jumlah atau total data yang ada pada database
     $total = 'SELECT count(*) from laporan_kerusakan';
@@ -47,10 +49,16 @@
     </header>
 
     <main class="m-3 p-2 gap-3">  
+
+        <!-- Formulir Laporan Barang Hilang (Jika admin mengunjungi halaman ini, maka formulir akan di hide) -->
+
         <?php if(!$isAdmin) {?>
         <section id="form-laporan" aria-labelledby="judul-form" >
             <h2 id="judul-form" class="text-center">Form Pelaporan Kerusakan</h2>
             <p class="text-center mb-4">Lengkapi data berikut untuk melaporkan fasilitas yang rusak.</p>
+            <?php if ($error !== '') { ?>
+                <p class="text-red-500 text-center mb-2"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
+            <?php } ?>
 
              <div class="flex justify-center align-center">
 
@@ -83,8 +91,6 @@
                             <option value="4">Peralatan Kelas</option>
                         </select>
                     
-
-                
                         <label for="deskripsi">Deskripsi kerusakan</label >
                         <textarea id="deskripsi" name="deskripsi" rows="4" required class="border rounded-sm border-gray-300 p-2 "></textarea>
                     
@@ -102,6 +108,9 @@
                     <button name="submit" type="submit" class="border rounded-sm border-gray-300 p-2 w-full bg-gray-800 text-white cursor-pointer hover:shadow-lg">Kirim Laporan</button>
                 </fieldset>
             </form>
+
+            <!-- Akhir Formulir -->
+
         </div>
         </section>
         <?php } ?>
@@ -123,6 +132,7 @@
                         <th scope="col" class="border p-2 text-left border-gray-300 font-semibold">Status</th>
                         <th scope="col" class="border p-2 text-left border-gray-300 font-semibold">Tanggal</th>
                         <th scope="col" class="border p-2 text-left border-gray-300 font-semibold">Penanggung Jawab</th>
+                        <!-- Kolom ini akan muncul bila admin mengakses halaman ini -->
                         <?php  if($isAdmin) {?>
                             <th scope="col" class="border p-2 text-left border-gray-300 font-semibold">Aksi</th>
                         <?php }?>
@@ -145,27 +155,34 @@
                                         <td scope="col" class="border p-2 text-left border-gray-300"><?= $row['status']?></td>
                                         <td scope="col" class="border p-2 text-left border-gray-300"><?= $row['tanggal_laporan'] ?></td> 
                                         <td scope="col" class="border p-2 text-left border-gray-300"><?=  $row['nama'] ?? '-' ?> </td> 
+
+                                   <!-- Kolom ini khusus hanya admin yang bisa diakses  -->
                                     <?php if($isAdmin) {?>
                                         <td scope="col"class=" border p-2 text-left border-gray-300">
                                             <div class="mb-4">
+                                                <!-- Tombol Edit Data -->
                                                 <form action="./backend/edit_data.php" method="post">
                                                     <input type="hidden" name="id" value="<?= (int) $row['id_laporan'] ?>">
                                                      <button class="bg-blue-400 text-white border-0 pl-2 pr-2 pt-1 pb-1 mb-1 mt-1 rounded-xl w-25 ">Edit</button>
                                                 </form>
+                                                <!-- Tombol Hapus Data -->
                                                 <form action="./backend/hapus_data.php" method="post" onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
                                                     <input type="hidden" name="id" value="<?= (int) $row['id_laporan'] ?>">
                                                     <button class="bg-red-600 text-white border-0 pl-2 pr-2 pt-1 pb-1 mb-1 mt-1 rounded-xl w-25"> Delete </button>
                                                 </form>
+                                                <!-- Tombol Update Status Menunggu dan Diproses -->
                                                 <?php if($row['status'] === "Menunggu") {?>
                                                     <form action="./backend/proses_laporan.php" method="post">
                                                     <input type="hidden" name="id" value="<?= (int) $row['id_laporan'] ?>">
                                                      <button class="bg-gray-800 text-white border-0 pl-2 pr-2 pt-1 pb-1 mb-1 mt-1 rounded-xl  w-25 ">Mulai Proses</button>
                                                 </form>
+
                                                 <?php } elseif($row['status'] === "Diproses") { ?>
                                                     <form action="./backend/selesai_laporan.php" method="post">
                                                     <input type="hidden" name="id" value="<?= (int) $row['id_laporan'] ?>">
                                                      <button class="bg-gray-800 text-white border-0 pl-2 pr-2 pt-1 pb-1 mb-1 mt-1 rounded-xl  w-25 ">Laporan Selesai</button>
                                                 </form>
+
                                                 <?php }?>
                                             </div>
                                         </td>
