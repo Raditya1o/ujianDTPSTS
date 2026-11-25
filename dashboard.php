@@ -114,18 +114,18 @@
                                                 <!-- Tombol Edit Data -->
                                                 <form action="./backend/edit_data.php" method="post">
                                                     <input type="hidden" name="id" value="<?= (int) $row['id_laporan'] ?>">
-                                                     <button class="bg-blue-400 text-white border-0 pl-2 pr-2 pt-1 pb-1 mb-1 mt-1 rounded-xl w-25 ">Edit</button>
+                                                     <button class="bg-blue-400 text-white border-0 pl-2 pr-2 pt-1 pb-1 mb-1 mt-1 rounded-xl w-25 cursor-pointer hover:bg-blue-700">Edit</button>
                                                 </form>
                                                 <!-- Tombol Hapus Data -->
                                                 <form action="./backend/hapus_data.php" method="post" onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
                                                     <input type="hidden" name="id" value="<?= (int) $row['id_laporan'] ?>">
-                                                    <button class="bg-red-600 text-white border-0 pl-2 pr-2 pt-1 pb-1 mb-1 mt-1 rounded-xl w-25"> Delete </button>
+                                                    <button class="bg-red-600 text-white border-0 pl-2 pr-2 pt-1 pb-1 mb-1 mt-1 rounded-xl w-25 cursor-pointer hover:bg-red-700"> Delete </button>
                                                 </form>
                                                 <!-- Tombol Update Status Menunggu dan Diproses -->
                                                 <?php if($row['status'] === "Menunggu") {?>
                                                     <form action="./backend/proses_laporan.php" method="post">
                                                     <input type="hidden" name="id" value="<?= (int) $row['id_laporan'] ?>">
-                                                     <button class="bg-gray-800 text-white border-0 pl-2 pr-2 pt-1 pb-1 mb-1 mt-1 rounded-xl  w-25 ">Mulai Proses</button>
+                                                     <button class="bg-gray-800 text-white border-0 pl-2 pr-2 pt-1 pb-1 mb-1 mt-1 rounded-xl  w-25 cursor-pointer hover:bg-gray-500">Mulai Proses</button>
                                                 </form>
 
                                                 <?php } elseif($row['status'] === "Diproses") { ?>
