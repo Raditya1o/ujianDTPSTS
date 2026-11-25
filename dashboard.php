@@ -39,7 +39,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-[#edf0f6]">
-    <header class="bg-gray-800 p-4 flex justify-evenly text-center text-white  border-b-3  border-gray-800">
+    <header class="bg-gray-800 p-4 flex flex-col justify-evenly items-center text-center text-white border-b-3  border-gray-800 sm:flex-row ">
         <div>
             <h1 class="text-2xl font-bold ">Sistem Pelaporan Kerusakan Fasilitas Sekolah</h1>
             <p>Catat dan pantau laporan kerusakan fasilitas sekolah.</p>
@@ -69,7 +69,8 @@
             <?php
                 echo '<p class="text-center mb-4">banyaknya laporan masuk: '. '<span class="font-bold">' . $jumlah . '</span>'. '</p>';
             ?>
-            <table class="border-separate border-spacing-0 overflow-hidden border-gray-400 w-4/5 max-w-6xl mx-auto rounded-2xl">
+            <div class="w-full overflow-x-auto">
+            <table class="min-w-250 w-full max-w-6xl mx-auto border-separate border-spacing-0 overflow-hidden border-gray-400 rounded-2xl">
                 <thead class="bg-gray-800 text-white border-b-2 border-gray-400 ">
                     <tr>
                         <th scope="col" class=" p-2 text-left  font-semibold">No.</th>

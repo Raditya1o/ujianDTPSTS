@@ -46,7 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Login Admin</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="bg-[#f2f2f2] font-sans">
+<body class="bg-[#edf0f6] font-sans">
+    <header class="bg-gray-800 p-4 flex sm:text-center text-white border-b-3  border-gray-800">
+        <div class="sm:ml-45">
+            <h1 class="text-2xl font-bold">Sistem Pelaporan Kerusakan Fasilitas Sekolah</h1>
+            <p>Catat dan pantau laporan kerusakan fasilitas sekolah.</p>
+        </div>
+    </header>
     <main class="mx-auto mt-16 max-w-sm border border-gray-300 bg-white p-5">
         <h1 class="my-4 text-3xl font-bold">Login Admin</h1>
 

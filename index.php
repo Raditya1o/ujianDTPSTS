@@ -44,19 +44,15 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body class="bg-[#edf0f6]">
-    <header class="bg-gray-800 p-4 flex justify-evenly text-center text-white  border-b-3  border-gray-800">
+    <header class="bg-gray-800 p-4 flex flex-col justify-evenly items-center text-center text-white border-b-3  border-gray-800 sm:flex-row ">
         <div>
             <h1 class="text-2xl font-bold ">Sistem Pelaporan Kerusakan Fasilitas Sekolah</h1>
             <p>Catat dan pantau laporan kerusakan fasilitas sekolah.</p>
         </div>
-        <nav aria-label="Navigasi utama" class="p-2 flex items-center gap-2">
+        <nav aria-label="Navigasi utama" class="p-2 flex items-center gap-2 ">
             <a href="#form-laporan" class="bg-white text-black p-1 pl-2 pr-2 rounded-sm hover:bg-blue-500 hover:text-white">Buat Laporan</a>
             <a href="dashboard.php" class="bg-white text-black p-1 pl-1 pr-2 rounded-sm hover:bg-blue-500 hover:text-white">Daftar Laporan</a>
-            <?php if($isAdmin) { ?>
-                <a href="logout.php" class="bg-red-500 p-1 pl-2 pr-2 rounded-sm hover:bg-red-700">Logout Admin</a>
-            <?php } else {?>
-                <a href="login.php" class="bg-white text-black p-1 pl-2 pr-2 rounded-sm hover:bg-blue-500 hover:text-white">Login Admin</a>
-            <?php } ?>
+            <a href="login.php" class="bg-white text-black p-1 pl-2 pr-2 rounded-sm hover:bg-blue-500 hover:text-white">Login Admin</a>
         </nav>
     </header>
 
@@ -75,12 +71,12 @@
             
             <div class="min-h-[70vh] flex justify-center items-center ">
                 
-                <form action="./backend/data_lapor.php" method="post" class="border p-4 flex justify-center flex-col items-center rounded-sm shadow-md border-gray-200  bg-white w-1/2 ">
+                <form action="./backend/data_lapor.php" method="post" class="border p-4 flex justify-center flex-col items-center rounded-sm shadow-md border-gray-200  bg-white w-full sm:w-1/2 ">
                     <fieldset class="w-full">
                         <legend class="font-bold text-xl mb-2 mt-4 text-left">DATA PELAPORAN</legend>
                         <p class="text-left mb-4 font-medium">Lengkapi data berikut untuk melaporkan fasilitas yang rusak.</p>
 
-                        <div class="flex flex-row w-full gap-3">
+                        <div class="flex flex-col w-full gap-3 sm:flex-row">
                             <div class=" flex-1 min-w-0"> 
                             <label for="nama_pelapor">Nama pelapor</label>
                             <input type="text" id="nama_pelapor" name="nama_pelapor" maxlength="100" required class="border rounded-sm w-full border-gray-300 p-2  ">
@@ -92,7 +88,7 @@
                             </div>
                         </div>
                     
-                        <div class="flex flex-row w-full gap-3">
+                        <div class="flex flex-col w-full gap-3 sm:flex-row">
 
                             <div class=" flex-1 min-w-0">
 
@@ -114,7 +110,7 @@
                             </div>
                             
                         </div>
-                        <div class="flex flex-row w-full gap-3">
+                        <div class="flex flex-col w-full gap-3 sm:flex-row">
                             
                             <div class=" flex-1 min-w-0">
                                 <label for="deskripsi" class="block">Deskripsi kerusakan</label>
@@ -135,7 +131,7 @@
                                 
                         </div>
 
-                    <button name="submit" type="submit" class="border rounded-sm  hover:bg-blue-700 p-2 w-1/4 mt-4 bg-blue-500 text-white cursor-pointer hover:shadow-lg">Kirim Laporan</button>
+                    <button name="submit" type="submit" class="border rounded-sm  hover:bg-blue-700 p-2 w-1/2 sm:1/4 mt-4 bg-blue-500 text-white cursor-pointer hover:shadow-lg">Kirim Laporan</button>
                 </fieldset>
             </form>
 
