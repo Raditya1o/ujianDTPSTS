@@ -37,25 +37,30 @@ $error = '';
                 $error = 'Prioritas wajb diisi!';
         }
 
+        // Jika validasi berhasil dilalui tanpa ada error yang terisi, jalankan perintah ini
         if($error === '') {
-        try {
-            // Gunakan prepared statement untuk memasuki data ke database lebih aman dan mencegah SQL Injection
-            $sql = $conn->prepare(
-                'INSERT INTO laporan_kerusakan (nama_pelapor, nama_fasilitas, lokasi, id_kategori, deskripsi, prioritas) VALUES( ?, ?, ?, ? ,? ,?); '
-            );
-            $sql ->execute([$nama_pelapor, $nama_fasilitas, $lokasi, $id_kategori, $deskripsi, $prioritas]); // Execute Perintah sql dengan variabel isi data input pengguna
-            $_SESSION['flash_msg'] = "Laporan berhasil dikirim!";
-            header('Location: ../index.php');
-            exit();
-        
-        } catch(PDOException $e) { // Tangkap kondisi jika try gagal menjalankan perintah
-            echo"Terjadi Kesalahan!" . $e->getMessage();
-        }
+            try {
+                // Gunakan prepared statement untuk memasuki data ke database lebih aman dan mencegah SQL Injection
+                $sql = $conn->prepare(
+                    'INSERT INTO laporan_kerusakan (nama_pelapor, nama_fasilitas, lokasi, id_kategori, deskripsi, prioritas) VALUES( ?, ?, ?, ? ,? ,?); '
+                );
+
+                $sql ->execute([$nama_pelapor, $nama_fasilitas, $lokasi, $id_kategori, $deskripsi, $prioritas]); 
+                // Execute Perintah sql dengan variabel isi data input pengguna
+                $_SESSION['flash_msg'] = "Laporan berhasil dikirim!";
+
+                header('Location: ../index.php');
+                exit();
+            
+            } catch(PDOException $e) { // Tangkap kondisi jika try gagal menjalankan perintah
+                echo"Terjadi Kesalahan!" . $e->getMessage();
+            }
         }
     }
 
-    
+    // Jika error terisi, kirim message error ke index.php
     if($error !== ''){
+
       $_SESSION['flash_error'] = $error;
       header("Location: ../index.php");
       exit();

@@ -13,8 +13,10 @@ $error = '';
     // Import Koneksi Database
     include '../databases/connect.php';
 
+    // Ambil id dari form kemudian filter, pastikan memakai metode post dan bertipe int
     $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
+    // Jika id tidak ada/tidak berinteger
     if($id === false || $id === null) {
         http_response_code(400);
         exit('ID laporan tidak valid.');
@@ -34,6 +36,7 @@ $error = '';
 
     // lakukan update ketika tombol 'update' di klik
     if(isset($_POST['update'])) {
+
         $nama_pelapor = trim($_POST['nama_pelapor'] ?? '');
         $nama_fasilitas = trim($_POST['nama_fasilitas'] ?? '');
         $lokasi = trim($_POST['lokasi'] ?? '');
@@ -118,7 +121,7 @@ $error = '';
     <main class="m-3 p-2 gap-3 h-screen">  
         <section id="form-laporan" aria-labelledby="judul-form" >
              <?php if ($error !== '') { ?>
-                <p class="text-red-500 text-center mb-2"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
+                <p class="text-red-500 text-center mb-2"><?= htmlspecialchars($error) ?></p>
             <?php } ?>
 
             <!-- TANTANGAN BONUS CREATE: Buat proses PHP agar POST menyimpan data. -->
@@ -183,7 +186,7 @@ $error = '';
                         </div>
 
                         <button name="update" type="submit" value="1" class="border rounded-sm hover:bg-blue-700 p-2 w-1/2 md:1/4 mt-4 bg-blue-500 text-white cursor-pointer hover:shadow-lg">Edit Laporan</button>
-                        <a href="../index.php" class="block text-left ml-6.5">Kembali ke Awal</a>
+                        <a href="../dashboard.php" class="block text-left ml-6.5">Kembali ke Awal</a>
                     </fieldset>
             </form>
 
@@ -191,7 +194,7 @@ $error = '';
         </section>
     </main>
     
-    <footer class="bg-gray-800 p-4 border-t-3  border-gray-800 mt-[90px] text-white sm:mt-4">
+    <footer class="bg-gray-800 p-4 border-t-3  border-gray-800 mt-22.5 text-white sm:mt-4">
         <p class="text-center">&copy; 2026 Sistem Pelaporan Kerusakan Fasilitas Sekolah.</p>
     </footer>
 </body>

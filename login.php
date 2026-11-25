@@ -25,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if(!$admin){
             $error = 'Email tidak ada';
         } elseif ($admin && password_verify($password, $admin['password'])) {
-            session_regenerate_id(true);
-            $_SESSION['admin_nama'] = $admin['nama'];
+            // Simpan data di $_SESSION agar data dapat diteruskan dan digunakan
+            $_SESSION['admin_nama'] = $admin['nama']; 
             $_SESSION['admin_id'] = $admin['admin_id'];
             $_SESSION['admin_email'] = $admin['email'];
 
