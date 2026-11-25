@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['admin_id'] = $admin['admin_id'];
             $_SESSION['admin_email'] = $admin['email'];
 
-            header('Location: index.php');
+            header('Location: dashboard.php');
             exit;
          } else {
             $error = 'Email atau Password salah!';
