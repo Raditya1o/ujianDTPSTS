@@ -19,20 +19,6 @@
         exit();
     }
 
-    // Ambil jumlah atau total data yang ada pada database
-    $total = 'SELECT count(*) from laporan_kerusakan';
-    $sql_total = $conn->query($total);
-
-    $jumlah = $sql_total->fetchColumn();
-
-    // Ambil data yang ada pada database bersamaan dengan kategori_kerusakan untuk join
-    $show = 'SELECT laporan_kerusakan.*,kategori_fasilitas.nama_kategori,admin.nama from laporan_kerusakan
-            join kategori_fasilitas on laporan_kerusakan.id_kategori = kategori_fasilitas.id_kategori
-            left join admin on laporan_kerusakan.admin_id = admin.admin_id
-            order by laporan_kerusakan.id_laporan desc
-            limit 10';
-    $sql_show = $conn->query($show);
-
 ?>
 
 <!DOCTYPE html>
@@ -63,10 +49,10 @@
         <?php if(!$isAdmin) {?>
         <section id="form-laporan" aria-labelledby="judul-form" class >
             <?php if ($error !== '') { ?>
-            <p class="text-red-500 text-center mb-2"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p>
+            <p class="text-red-500 text-center mb-2"><?= htmlspecialchars($error) ?></p>
             <?php } ?>
             <?php if ($msg !== '') { ?>
-            <p class="text-green-600 text-center mb-2"><?= htmlspecialchars($msg, ENT_QUOTES, 'UTF-8') ?></p>
+            <p class="text-green-600 text-center mb-2"><?= htmlspecialchars($msg) ?></p>
             <?php } ?>
             
             <div class="min-h-[70vh] flex justify-center items-center ">

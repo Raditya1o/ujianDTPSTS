@@ -45,8 +45,9 @@ $error = '';
                     'INSERT INTO laporan_kerusakan (nama_pelapor, nama_fasilitas, lokasi, id_kategori, deskripsi, prioritas) VALUES( ?, ?, ?, ? ,? ,?); '
                 );
 
-                $sql ->execute([$nama_pelapor, $nama_fasilitas, $lokasi, $id_kategori, $deskripsi, $prioritas]); 
                 // Execute Perintah sql dengan variabel isi data input pengguna
+                $sql ->execute([$nama_pelapor, $nama_fasilitas, $lokasi, $id_kategori, $deskripsi, $prioritas]); 
+                        
                 $_SESSION['flash_msg'] = "Laporan berhasil dikirim!";
 
                 header('Location: ../index.php');

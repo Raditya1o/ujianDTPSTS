@@ -29,6 +29,12 @@ $error = '';
     // Data laporan berdasarkan id disimpan disini
     $data_lama = $sql->fetch(PDO::FETCH_ASSOC);
 
+    // Jika data id ada, tetapi isinya tidak ada (tidak ada data di id tersebut), return error 404
+    if($data_lama === false) {
+        http_response_code(404);
+        exit('Data laporan tidak ditemukan');
+    }
+
     // Ambil data kategori 
     $sql_kategori = $conn->query('SELECT * from kategori_fasilitas');
     $kategori = $sql_kategori->fetchAll(PDO::FETCH_ASSOC);
